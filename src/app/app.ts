@@ -14,17 +14,23 @@ app.use(express.json())
 
 // Create schema with full concept
 
-const noteSchema = new Schema({
-    title: { type: String, require: true, trim: true },
-    content: { type: String, default: '' },
-    category: { type: String, enum: ["Personal", "Work", "Study", "Public"], default: 'Personal' },
-    isPinned: {
-        type: Boolean,
-        default: false
-    },
-    createdAt: { type: Date, default: Date.now }
+const noteSchema = new Schema(
+    {
+        title: { type: String, require: true, trim: true },
+        content: { type: String, default: '' },
+        category: { type: String, enum: ["Personal", "Work", "Study", "Public"], default: 'Personal' },
+        isPinned: {
+            type: Boolean,
+            default: false
+        },
+        createdAt: { type: Date, default: Date.now }
 
-})
+    },
+    {
+        versionKey: false,
+        timestamps: true
+    }
+)
 
 
 // Add Model to Note Collection
@@ -99,7 +105,7 @@ app.patch('/update-note/:noteId', async (req: Request, res: Response) => {
 
     const UpdateNote = await Note.findByIdAndUpdate(noteId, updateNote)
 
-       res.status(200).json({
+    res.status(200).json({
         success: true,
         messege: 'Note update successfully',
         updateNote
@@ -115,7 +121,7 @@ app.delete('/delete-note/:noteId', async (req: Request, res: Response) => {
 
     const deleteNote = await Note.findByIdAndDelete(noteId)
 
-       res.status(200).json({
+    res.status(200).json({
         success: true,
         messege: 'Note deleted successfully',
         deleteNote
