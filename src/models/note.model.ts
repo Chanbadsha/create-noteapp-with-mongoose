@@ -10,7 +10,7 @@ import { model, Schema } from "mongoose"
 
 // Create schema with full concept
 
-const noteSchema = new Schema(
+const noteSchema = new Schema<INotes>(
     {
         title: { type: String, require: true, trim: true },
         content: { type: String, default: '' },

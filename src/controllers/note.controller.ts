@@ -19,7 +19,7 @@ notesRouter.post('/create-note', async (req: Request, res: Response) => {
     // Create note with approch 2, This is usual
 
     const note = req.body
-    // console.log(first)
+
     const createNote = await Note.create(note)
 
 
