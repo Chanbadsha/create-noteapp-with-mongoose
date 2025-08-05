@@ -72,13 +72,12 @@ app.get('/notes', async (req: Request, res: Response) => {
 
 // Get Single Note with Id
 
-
 app.get('/notes/:noteById', async (req: Request, res: Response) => {
     const noteId = req.params.noteById
 
     // First Approch
     // const note = await Note.findOne({_id:noteId})
-    
+
     // Best Approch
     const note = await Note.findById(noteId)
 
@@ -88,6 +87,39 @@ app.get('/notes/:noteById', async (req: Request, res: Response) => {
         note
     })
 
+
+})
+
+
+// Update Single Note
+
+app.patch('/update-note/:noteId', async (req: Request, res: Response) => {
+    const noteId = req.params.noteId
+    const updateNote = req.body
+
+    const UpdateNote = await Note.findByIdAndUpdate(noteId, updateNote)
+
+       res.status(200).json({
+        success: true,
+        messege: 'Note update successfully',
+        updateNote
+    })
+
+})
+
+// Delete Note
+
+app.delete('/delete-note/:noteId', async (req: Request, res: Response) => {
+    const noteId = req.params.noteId
+
+
+    const deleteNote = await Note.findByIdAndDelete(noteId)
+
+       res.status(200).json({
+        success: true,
+        messege: 'Note deleted successfully',
+        deleteNote
+    })
 
 })
 
