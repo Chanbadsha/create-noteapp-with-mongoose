@@ -1,12 +1,15 @@
 import express, { Application, Request, Response } from 'express'
-import { model, Schema } from 'mongoose'
-import { notesRouter } from '../controllers/note.controller'
-const app: Application = express()
 
+import { notesRouter } from '../controllers/note.controller'
+import { userRouter } from '../controllers/users.controller'
+const app: Application = express()
+// Middleware
 app.use(express.json())
 
+// router
+app.use('/notes', notesRouter)
 
-app.use('/notes',notesRouter)
+app.use('/users', userRouter)
 
 
 
