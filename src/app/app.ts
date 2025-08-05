@@ -6,18 +6,34 @@ const app: Application = express()
 
 
 // Create schema for all notes
+// const noteSchema = new Schema({
+//     title: String,
+//     content: String
+// })
+
+
+// Create schema with full concept
+
 const noteSchema = new Schema({
-    title: String,
-    content: String
+    title: { type: String, require: true },
+    content: { type: String, default: '' },
+    category: { type: String, enum: ["Personal", "Work", "Study", "Public"], default: 'Personal' },
+    isPinned: {
+        type: Boolean,
+        default: false
+    }
+
 })
 
+
+// Add Model to Note Collection
 const Note = model("Note", noteSchema)
 
 
 app.post('/create-note', async (req: Request, res: Response) => {
     const myNote = new Note({
         title: 'I am learning Mongoose',
-        content: "This is learning process of mongoose schema"
+        
     })
     await myNote.save()
     res.status(201).json({
