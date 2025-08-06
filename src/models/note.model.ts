@@ -6,6 +6,7 @@
 // })
 
 import { model, Schema } from "mongoose"
+import { INotes } from "../interfaces/notes.interfaces"
 
 
 // Create schema with full concept
@@ -18,6 +19,11 @@ const noteSchema = new Schema<INotes>(
         isPinned: {
             type: Boolean,
             default: false
+        },
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true
         }
 
     },

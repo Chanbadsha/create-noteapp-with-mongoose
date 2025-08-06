@@ -5,8 +5,8 @@ const addressSchema = new Schema<IAddress>({
     village: String,
     city: String,
     zip: Number,
-  
-
+}, {
+    _id: false
 })
 
 const userSchema = new Schema<IUser>({
