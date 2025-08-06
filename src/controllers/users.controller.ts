@@ -18,8 +18,8 @@ const userZodSchema = z.object({
 // Create User
 userRouter.post('/create-user', async (req: Request, res: Response) => {
     try {
-        const userInfo = await userZodSchema.parseAsync(req.body)
-
+        // const userInfo = await userZodSchema.parseAsync(req.body)
+        const userInfo = await req.body
         const user = await User.create(userInfo)
 
         res.status(201).json({
@@ -28,7 +28,7 @@ userRouter.post('/create-user', async (req: Request, res: Response) => {
             note: user
         })
     } catch (error: any) {
-        console.log(error.message,"from zod"),
+        console.log(error.message, "from zod"),
             res.status(400).json({
                 success: false,
                 message: "A user created failed",
